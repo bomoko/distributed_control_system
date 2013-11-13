@@ -5,7 +5,7 @@
 window.onload = function() { 
 
 sprite_lib = (function() {
-    this.agent_direction = 0; //in degrees
+    this.agent_direction = 90; //in degrees
     this.agent_x = 320;
     this.agent_y = 240;
     var that = this;
@@ -15,12 +15,20 @@ sprite_lib = (function() {
         that.agent_x = that.agent_x - 1;
     };
     
+    this.get_agent_direction = function() {
+        return that.agent_direction;
+    };
+    
     this.agent_move_clockwise = function() {
         that.agent_direction = that.agent_direction + 1;
+        if(that.agent_direction < 0) { that.agent_direction = that.agent_direction + 360}
+        if(that.agent_direction > 360) { that.agent_direction = that.agent_direction - 360}
     };
 
     this.agent_move_counterclockwise = function() {
         that.agent_direction = that.agent_direction - 1;
+        if(that.agent_direction < 0) { that.agent_direction = that.agent_direction + 360}
+        if(that.agent_direction > 360) { that.agent_direction = that.agent_direction - 360}
     };
 
     
@@ -47,8 +55,8 @@ function sketchProc(processing) {
         function draw_triangle(x,y,direction_degs) {
             processing.pushMatrix();
             processing.translate(x,y);
-            processing.rotate(processing.radians(direction_degs));
-            processing.triangle(-30, 30, 0, -30, 30, 30);
+            processing.rotate(processing.radians(direction_degs + 180)); //we add the 180 because rotation is clockwise
+            processing.triangle(-30, 30, 30, 0, -30, -30);
             processing.popMatrix();
         };
 
@@ -106,9 +114,10 @@ environment = (function() {
     return this;
 }());
 
-var processingInstance = new Processing(document.getElementById('dcs_display'), sketchProc);
+processingInstance = new Processing(document.getElementById('dcs_display'), sketchProc);
 
 //set up basic choices
-environment.set_choice_1(environment.create_choice(160,240,5,0));
-environment.set_choice_2(environment.create_choice(480,240,6,0));
+environment.set_choice_1(environment.create_choice(160,240,7,0));
+environment.set_choice_2(environment.create_choice(480,240,9,0));
+subagent = subsumption_agent();
 };
