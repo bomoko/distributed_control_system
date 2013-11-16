@@ -5,11 +5,17 @@
 window.onload = function() { 
 
 sprite_lib = (function() {
-    this.agent_direction = 90; //in degrees
-    this.agent_x = 320;
-    this.agent_y = 240;
+	
     var that = this;
     
+	//what you expect ...
+	this.init = function() {
+		that.agent_direction = 90; //in degrees
+		that.agent_x = 320;
+		that.agent_y = 240;
+	};
+	this.init();
+	
     //will move the agent forward by one step in the direction it's pointing in
     this.agent_move_forward = function() {
         that.agent_x += Math.cos(that.agent_direction* Math.PI / 180)*5;
@@ -119,7 +125,7 @@ environment = (function() {
 processingInstance = new Processing(document.getElementById('dcs_display'), sketchProc);
 
 //set up basic choices
-environment.set_choice_1(environment.create_choice(160,300,1,1));
-environment.set_choice_2(environment.create_choice(480,240,1,0));
+environment.set_choice_1(environment.create_choice(160,300,1000,1));
+environment.set_choice_2(environment.create_choice(480,240,1,5));
 subagent = subsumption_agent();
 };
