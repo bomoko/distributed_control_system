@@ -12,7 +12,8 @@ sprite_lib = (function() {
     
     //will move the agent forward by one step in the direction it's pointing in
     this.agent_move_forward = function() {
-        that.agent_x = that.agent_x - 1;
+        that.agent_x += Math.cos(that.agent_direction* Math.PI / 180)*5;
+		that.agent_y += Math.sin(that.agent_direction * Math.PI / 180)*5;
     };
     
     this.get_agent_direction = function() {
@@ -50,13 +51,14 @@ function sketchProc(processing) {
 
     //override the draw function
     processing.draw = function() {
-        
+        processing.text("hello world!",100,100);
         //draw out the agent, in the direction it's facing.
         function draw_triangle(x,y,direction_degs) {
             processing.pushMatrix();
-            processing.translate(x,y);
-            processing.rotate(processing.radians(direction_degs + 180)); //we add the 180 because rotation is clockwise
-            processing.triangle(-30, 30, 30, 0, -30, -30);
+			processing.translate(x,y);
+            processing.rotate(processing.radians(direction_degs)); //we add the 180 because rotation is clockwise
+			processing.triangle(-30, 30, 30, 0, -30, -30);
+			processing.ellipse(30,0,5,5);
             processing.popMatrix();
         };
 
@@ -117,7 +119,7 @@ environment = (function() {
 processingInstance = new Processing(document.getElementById('dcs_display'), sketchProc);
 
 //set up basic choices
-environment.set_choice_1(environment.create_choice(160,240,7,0));
-environment.set_choice_2(environment.create_choice(480,240,9,0));
+environment.set_choice_1(environment.create_choice(160,300,1,1));
+environment.set_choice_2(environment.create_choice(480,240,1,0));
 subagent = subsumption_agent();
 };
