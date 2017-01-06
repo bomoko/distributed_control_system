@@ -2,7 +2,7 @@
 
 This code is meant to simulate one of two agents with different kinds of internal architectures for choice.
 
-This code sucks, but I'm keeping it around because it's one of the earliest artifacts in the work that lead to my paper (with David Spurrett) on Robot control systems, [Robots in Casinos](http://www.tandfonline.com/doi/abs/10.1080/02580136.2016.1209931).
+This code sucks, but I'm keeping it around because it's one of the earliest artefacts in the work that lead to my paper (with David Spurrett) on Robot control systems, [Robots in Casinos](http://www.tandfonline.com/doi/abs/10.1080/02580136.2016.1209931).
 
 The first is an agent that is controlled centrally using a utility function to determine it's best move - all options are pumped through the utility function and a plan of action is determined from there.
 
